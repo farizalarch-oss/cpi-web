@@ -162,7 +162,7 @@ const Products = () => {
                     <span key={i} className={`${product.tagClass} text-sm font-medium px-3 py-1 rounded-full`}>{f}</span>
                   ))}
                 </div>
-                <Button asChild><Link to={`/products/${product.slug}`}>View Details<ArrowRight className="w-4 h-4 ml-2" /></Link></Button>
+                <Button asChild><Link to={product.id === "honey" ? "/honey" : `/products/${product.slug}`}>View Details<ArrowRight className="w-4 h-4 ml-2" /></Link></Button>
               </div>
             </motion.div>
           </div>
@@ -204,7 +204,7 @@ const Products = () => {
                     <span key={i} className={`${product.tagClass} text-sm font-medium px-3 py-1 rounded-full`}>{f}</span>
                   ))}
                 </div>
-                <Button asChild><Link to={`/products/${product.slug}`}>View Details<ArrowRight className="w-4 h-4 ml-2" /></Link></Button>
+                <Button asChild><Link to={product.id === "honey" ? "/honey" : `/products/${product.slug}`}>View Details<ArrowRight className="w-4 h-4 ml-2" /></Link></Button>
               </div>
             </motion.div>
           </div>
