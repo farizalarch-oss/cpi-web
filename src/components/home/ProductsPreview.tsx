@@ -10,8 +10,10 @@ const products = [
   {
     id: 1,
     name: "Coconut Charcoal Briquette",
+    slug: "charcoal-briquette",
     category: "CPI Main Catalog",
-    description: "Premium quality coconut shell charcoal for BBQ and hookah. Custom grades and shapes available.",
+    description:
+      "Premium quality coconut shell charcoal for BBQ and hookah. Custom grades and shapes available.",
     image: charcoalImg,
     features: ["Ash < 2.5%", "7,200+ Calories", "2hr Burn Time"],
     accent: "charcoal",
@@ -19,8 +21,10 @@ const products = [
   {
     id: 2,
     name: "BeeZee Premium Honey",
+    slug: "honey",
     category: "BeeZee Honey Indonesia",
-    description: "Pure and black honey varieties from Indonesian beekeepers. Export quality with monthly production capacity.",
+    description:
+      "Pure and black honey varieties from Indonesian beekeepers. Export quality with monthly production capacity.",
     image: honeyImg,
     features: ["Pure Natural", "Export Quality", "Multiple Sizes"],
     accent: "honey",
@@ -28,8 +32,10 @@ const products = [
   {
     id: 3,
     name: "Nusantaraya Crafts",
+    slug: "nusantara-crafts",
     category: "Nusantaraya",
-    description: "Authentic Indonesian arts & crafts including batik products, animal figurines, and handmade accessories.",
+    description:
+      "Authentic Indonesian arts & crafts including batik products, animal figurines, and handmade accessories.",
     image: craftsImg,
     features: ["Handmade", "Batik Art", "Cultural Heritage"],
     accent: "batik",
@@ -81,7 +87,15 @@ export const ProductsPreview = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {products.map((product, index) => {
             const styles = accentStyles[product.accent as keyof typeof accentStyles];
-            const isHoney = product.accent === "honey";
+
+            const linkTo =
+              product.accent === "honey"
+                ? "/honey"
+                : `/products/${product.slug}`;
+
+            const buttonLabel =
+              product.accent === "honey" ? "View Details" : "Learn More";
+
             return (
               <motion.div
                 key={product.id}
@@ -99,7 +113,9 @@ export const ProductsPreview = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute top-4 left-4">
-                    <span className={`${styles.badge} text-xs font-semibold px-3 py-1.5 rounded-full`}>
+                    <span
+                      className={`${styles.badge} text-xs font-semibold px-3 py-1.5 rounded-full`}
+                    >
                       {product.category}
                     </span>
                   </div>
@@ -127,10 +143,10 @@ export const ProductsPreview = () => {
                   </div>
 
                   <Link
-                    to={isHoney ? "/honey" : "/products"}
+                    to={linkTo}
                     className={`inline-flex items-center gap-2 ${styles.link} font-semibold text-sm transition-colors duration-300`}
                   >
-                    {isHoney ? "View Details" : "Learn More"}
+                    {buttonLabel}
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
