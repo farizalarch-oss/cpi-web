@@ -81,6 +81,7 @@ export const ProductsPreview = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {products.map((product, index) => {
             const styles = accentStyles[product.accent as keyof typeof accentStyles];
+            const isHoney = product.accent === "honey";
             return (
               <motion.div
                 key={product.id}
@@ -126,10 +127,10 @@ export const ProductsPreview = () => {
                   </div>
 
                   <Link
-                    to="/products"
+                    to={isHoney ? "/honey" : "/products"}
                     className={`inline-flex items-center gap-2 ${styles.link} font-semibold text-sm transition-colors duration-300`}
                   >
-                    Learn More
+                    {isHoney ? "View Details" : "Learn More"}
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>

@@ -32,7 +32,7 @@ const Honey = () => {
             </div>
             <div>
               <span className="inline-block text-honey-dark font-semibold text-sm tracking-widest uppercase mb-4">
-                Beezee Honey Indonesia
+                BeeZee Honey Indonesia
               </span>
               <h1 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
                 Premium Indonesian Honey
@@ -40,6 +40,7 @@ const Honey = () => {
               <p className="text-muted-foreground mb-6">
                 Pure, natural honey from Indonesian apiaries meeting international export standards.
               </p>
+              <h2 className="font-semibold text-foreground mb-3">Specifications</h2>
               <div className="flex gap-3 mb-6">
                 {["140gr", "350gr", "730gr"].map((size) => (
                   <span
