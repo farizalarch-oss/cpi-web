@@ -1,9 +1,8 @@
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowRight, Check, Flame, Droplet, Palette, Leaf, Snowflake, Music } from "lucide-react";
+import { ArrowRight, Check, Flame, Droplet, Leaf, Snowflake, Palette, Music } from "lucide-react";
 import { motion } from "framer-motion";
-import { allProducts, seafoodItems } from "@/lib/productData";
 import grouperImg from "@/assets/product-grouper.jpg";
 import squidImg from "@/assets/product-squid.jpg";
 import charcoalImg from "@/assets/product-charcoal-new.jpg";
@@ -15,9 +14,22 @@ import vanillaImg from "@/assets/product-vanilla.jpg";
 import honeyImg from "@/assets/product-honey-new.jpg";
 import craftsImg from "@/assets/product-batik.png";
 import angklungImg from "@/assets/product-angklung.png";
-import { companyInfo } from "@/lib/companyInfo";
 
 const cpiProducts = [
+  {
+    id: "honey",
+    slug: "honey",
+    name: "BeeZee Premium Honey",
+    image: honeyImg,
+    description: "Pure and black honey varieties from Indonesian beekeepers. Export quality with monthly production capacity.",
+    specs: ["140gr", "350gr", "730gr", "Pure Natural"],
+    features: ["Export Quality", "Multiple Sizes", "Monthly Supply"],
+    icon: Droplet,
+    theme: "honey",
+    bgClass: "bg-honey-muted",
+    accentClass: "bg-honey text-primary-foreground",
+    tagClass: "bg-honey/20 text-honey-dark",
+  },
   {
     id: "charcoal",
     slug: "coconut-charcoal-briquette",
@@ -119,7 +131,6 @@ const Products = () => {
 
   return (
     <Layout>
-      {/* Hero */}
       <section className="py-32 bg-gradient-hero">
         <div className="container mx-auto px-4 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-3xl mx-auto text-center">
@@ -130,7 +141,6 @@ const Products = () => {
         </div>
       </section>
 
-      {/* CPI Products with themed sections */}
       {cpiProducts.map((product, index) => (
         <section key={product.id} id={product.id} className={`py-24 ${product.bgClass} transition-colors duration-500`}>
           <div className="container mx-auto px-4 lg:px-8">
@@ -146,9 +156,11 @@ const Products = () => {
                   </div>
                 </div>
               </div>
+
               <div className={index % 2 === 1 ? "lg:order-1" : ""}>
                 <h3 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-4">{product.name}</h3>
                 <p className="text-muted-foreground mb-6">{product.description}</p>
+
                 <div className="mb-6">
                   <h4 className="font-semibold text-foreground mb-3">Specifications:</h4>
                   <ul className="space-y-2">
@@ -159,15 +171,22 @@ const Products = () => {
                     ))}
                   </ul>
                 </div>
+
                 <div className="flex flex-wrap gap-2 mb-6">
                   {product.features.map((f, i) => (
                     <span key={i} className={`${product.tagClass} text-sm font-medium px-3 py-1 rounded-full`}>{f}</span>
                   ))}
                 </div>
+
                 {product.id === "honey" ? (
-                  <Button onClick={() => navigate("/honey")}>
-                    View Details<ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
+                  <div className="flex gap-4">
+                    <Button onClick={() => navigate("/honey")}>
+                      View Details<ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                    <Button asChild variant="secondary">
+                      <Link to="/contact">Inquire Now</Link>
+                    </Button>
+                  </div>
                 ) : (
                   <Button asChild>
                     <Link to={`/products/${product.slug}`}>
@@ -187,204 +206,63 @@ const Products = () => {
           <div className="container mx-auto px-4 lg:px-8">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
               className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center`}>
+              
               <div className={index % 2 === 0 ? "lg:order-2" : ""}>
                 <div className="relative rounded-2xl overflow-hidden shadow-large">
                   <img src={product.image} alt={product.name} className="w-full h-80 object-cover" />
-                  <div className="absolute top-4 left-4">
-                    <div className={`w-12 h-12 ${product.accentClass} rounded-xl flex items-center justify-center`}>
-                      <product.icon className="w-6 h-6" />
-                    </div>
-                  </div>
                 </div>
               </div>
+
               <div className={index % 2 === 0 ? "lg:order-1" : ""}>
-                <span className="inline-block text-spice-dark font-semibold text-sm tracking-widest uppercase mb-2">Premium Spices</span>
+                <span className="inline-block font-semibold text-sm tracking-widest uppercase mb-2">Premium Spices</span>
                 <h3 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-4">{product.name}</h3>
                 <p className="text-muted-foreground mb-6">{product.description}</p>
-                <div className="mb-6">
-                  <h4 className="font-semibold text-foreground mb-3">Specifications:</h4>
-                  <ul className="space-y-2">
-                    {product.specs.map((spec, i) => (
-                      <li key={i} className="flex items-center gap-2 text-muted-foreground text-sm">
-                        <Check className="w-4 h-4 text-primary" />{spec}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {product.features.map((f, i) => (
-                    <span key={i} className={`${product.tagClass} text-sm font-medium px-3 py-1 rounded-full`}>{f}</span>
-                  ))}
-                </div>
-                {product.id === "honey" ? (
-                  <Button onClick={() => navigate("/honey")}>
+
+                <Button asChild>
+                  <Link to={`/products/${product.slug}`}>
                     View Details<ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                ) : (
-                  <Button asChild>
-                    <Link to={`/products/${product.slug}`}>
-                      View Details<ArrowRight className="w-4 h-4 ml-2" />
-                    </Link>
-                  </Button>
-                )}
+                  </Link>
+                </Button>
               </div>
             </motion.div>
           </div>
         </section>
       ))}
 
-      {/* Seafood Section */}
+      {/* Seafood */}
       <section id="seafood" className="py-24 bg-seafood-muted transition-colors duration-500">
-        <div className="container mx-auto px-4 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16 text-center">
-            <span className="inline-block text-seafood-dark font-semibold text-sm tracking-widest uppercase mb-4">Export-Grade Seafood</span>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">Premium Indonesian Seafood</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">Fresh and frozen seafood products with proper export handling and cold chain standards.</p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative rounded-2xl overflow-hidden shadow-large">
-              <img src={grouperImg} alt="Grouper Fish" className="w-full h-72 object-cover" />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                <h3 className="text-white font-heading text-xl font-bold">Grouper Fish (Kerapu)</h3>
-                <p className="text-white/80 text-sm">Fresh and frozen varieties</p>
-              </div>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative rounded-2xl overflow-hidden shadow-large">
-              <img src={squidImg} alt="Frozen Squid" className="w-full h-72 object-cover" />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                <h3 className="text-white font-heading text-xl font-bold">Frozen Squid</h3>
-                <p className="text-white/80 text-sm">Flash-frozen for freshness</p>
-              </div>
-            </motion.div>
-          </div>
-
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {seafoodProducts.map((item, i) => (
-              <div key={i} className="bg-card rounded-xl p-6 shadow-soft border border-seafood/10">
-                <div className="w-12 h-12 bg-seafood/10 rounded-xl flex items-center justify-center mb-4">
-                  <Snowflake className="w-6 h-6 text-seafood-dark" />
-                </div>
-                <h4 className="font-heading font-semibold text-foreground mb-2">{item.name}</h4>
-                <p className="text-muted-foreground text-sm mb-3">{item.desc}</p>
-                <span className="bg-seafood/10 text-seafood-dark text-xs font-medium px-3 py-1 rounded-full">Export Quality</span>
-              </div>
-            ))}
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-12 bg-card rounded-xl p-6 shadow-soft border border-seafood/10">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-seafood text-primary-foreground rounded-xl flex items-center justify-center flex-shrink-0">
-                <Snowflake className="w-6 h-6" />
-              </div>
-              <div>
-                <h4 className="font-heading font-semibold text-foreground mb-2">Cold Chain Standards</h4>
-                <p className="text-muted-foreground text-sm">All seafood products are handled with proper cold chain management to ensure freshness and quality throughout the export process. We maintain strict temperature controls from harvest to delivery.</p>
-              </div>
-            </div>
-          </motion.div>
-
-          <div className="text-center mt-8">
-            <Button asChild><Link to="/contact">Inquire About Seafood<ArrowRight className="w-4 h-4 ml-2" /></Link></Button>
-          </div>
+        <div className="container mx-auto px-4 lg:px-8 text-center">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">Premium Indonesian Seafood</h2>
+        </div>
+        <div className="text-center px-4">
+          <Button asChild><Link to="/contact">Inquire About Seafood</Link></Button>
         </div>
       </section>
 
       {/* Honey Section */}
-      <section id="honey" className="py-24 bg-honey-muted transition-colors duration-500">
+      <section id="honey-section" className="py-24 bg-honey-muted transition-colors duration-500">
         <div className="container mx-auto px-4 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="relative">
-              <div className="rounded-2xl overflow-hidden shadow-large"><img src={honeyImg} alt="BeeZee Honey" className="w-full h-96 object-cover" /></div>
-              <div className="absolute -bottom-6 -right-6 bg-honey rounded-2xl p-6 shadow-large">
-                <div className="text-accent-foreground font-heading font-bold text-2xl">Export</div>
-                <div className="text-accent-foreground/80">Quality</div>
+              <div className="rounded-2xl overflow-hidden shadow-large">
+                <img src={honeyImg} alt="BeeZee Honey" className="w-full h-96 object-cover" />
               </div>
             </div>
             <div>
               <span className="inline-block text-honey-dark font-semibold text-sm tracking-widest uppercase mb-4">BeeZee Honey Indonesia</span>
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">Premium Indonesian Honey</h2>
-              <p className="text-muted-foreground mb-6">Pure, natural honey from Indonesian apiaries meeting international export standards.</p>
-              <div className="flex gap-3 mb-6">
-                {["140gr", "350gr", "730gr"].map((s) => <span key={s} className="bg-honey/20 text-honey-dark border border-honey/30 text-sm font-medium px-4 py-2 rounded-lg">{s}</span>)}
+              <p className="text-muted-foreground mb-6">Natural and raw honey varieties ready for global distribution.</p>
+
+              <div className="flex gap-4">
+                <Button onClick={() => navigate("/honey")}>
+                  View Details<ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+                <Button asChild variant="secondary">
+                  <Link to="/contact">Inquire Now</Link>
+                </Button>
               </div>
-              <Button asChild variant="hero"><Link to="/contact">Inquire Now<ArrowRight className="w-4 h-4 ml-2" /></Link></Button>
             </div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Crafts Section */}
-      <section id="crafts" className="py-24 bg-batik-muted transition-colors duration-500">
-        <div className="container mx-auto px-4 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="lg:order-2"><div className="rounded-2xl overflow-hidden shadow-large bg-card p-8"><img src={craftsImg} alt="Nusantaraya Crafts" className="w-full h-80 object-contain" /></div></div>
-            <div className="lg:order-1">
-              <span className="inline-block text-batik font-semibold text-sm tracking-widest uppercase mb-4">Nusantaraya</span>
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">Indonesian Arts & Crafts</h2>
-              <p className="text-muted-foreground mb-6">Authentic handmade products celebrating Indonesian cultural heritage and traditional craftsmanship.</p>
-              <div className="bg-batik/10 rounded-xl p-6 mb-8 flex items-start gap-3">
-                <Palette className="w-6 h-6 text-batik flex-shrink-0 mt-1" />
-                <div><h4 className="font-semibold text-foreground mb-1">Cultural Heritage</h4><p className="text-muted-foreground text-sm">Handcrafted by skilled Indonesian artisans.</p></div>
-              </div>
-              <div className="flex flex-wrap gap-2 mb-6">
-                <span className="bg-batik/10 text-batik text-sm font-medium px-3 py-1 rounded-full">Batik Products</span>
-                <span className="bg-batik/10 text-batik text-sm font-medium px-3 py-1 rounded-full">Animal Crafts</span>
-                <span className="bg-batik/10 text-batik text-sm font-medium px-3 py-1 rounded-full">Keychains</span>
-                <span className="bg-batik/10 text-batik text-sm font-medium px-3 py-1 rounded-full">Export Quality</span>
-              </div>
-              <Button asChild><Link to="/contact">View Catalog<ArrowRight className="w-4 h-4 ml-2" /></Link></Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Musikalite Section */}
-      <section id="musikalite" className="py-24 bg-music-muted transition-colors duration-500">
-        <div className="container mx-auto px-4 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="rounded-2xl overflow-hidden shadow-large bg-card p-8"><img src={angklungImg} alt="Musikalite Angklung" className="w-full h-80 object-contain" /></div>
-            </div>
-            <div>
-              <span className="inline-block text-music-dark font-semibold text-sm tracking-widest uppercase mb-4">Musikalite</span>
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">Premium Indonesian Musical Instruments</h2>
-              <p className="text-muted-foreground mb-6">Export-quality traditional Indonesian musical instruments, handcrafted with premium materials and authentic craftsmanship.</p>
-              
-              <div className="space-y-4 mb-8">
-                <div className="bg-music/10 rounded-xl p-5 flex items-start gap-3">
-                  <Music className="w-6 h-6 text-music-dark flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">Angklung</h4>
-                    <p className="text-muted-foreground text-sm">Traditional bamboo musical instrument, UNESCO Intangible Cultural Heritage.</p>
-                  </div>
-                </div>
-                <div className="bg-music/10 rounded-xl p-5 flex items-start gap-3">
-                  <Music className="w-6 h-6 text-music-dark flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">Traditional Instruments</h4>
-                    <p className="text-muted-foreground text-sm">Various traditional Indonesian instruments available for export.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-2 mb-6">
-                <span className="bg-music/20 text-music-dark text-sm font-medium px-3 py-1 rounded-full">Premium Craftsmanship</span>
-                <span className="bg-music/20 text-music-dark text-sm font-medium px-3 py-1 rounded-full">Export Quality</span>
-                <span className="bg-music/20 text-music-dark text-sm font-medium px-3 py-1 rounded-full">Cultural Heritage</span>
-              </div>
-              <Button asChild><Link to="/contact">Inquire Now<ArrowRight className="w-4 h-4 ml-2" /></Link></Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-24 bg-gradient-hero">
-        <div className="container mx-auto px-4 lg:px-8 text-center">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary-foreground mb-6">Interested in Our Products?</h2>
-          <p className="text-primary-foreground/80 text-lg mb-8 max-w-2xl mx-auto">Contact our team to discuss pricing and shipping arrangements.</p>
-          <Button asChild variant="hero" size="xl"><Link to="/contact">Request a Quote<ArrowRight className="w-5 h-5 ml-2" /></Link></Button>
         </div>
       </section>
     </Layout>
