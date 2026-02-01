@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import React from "react";
 
 interface HoverImageProps {
   src: string;
@@ -16,16 +17,14 @@ export const HoverImage = ({
   badge,
 }: HoverImageProps) => {
   return (
-    <div className={cn("relative group", className)}>
+    <div className={cn("relative group overflow-hidden rounded-2xl", className)}>
       {/* BLURRED BACKGROUND ON HOVER */}
       <div
         className="
           absolute inset-0
-          rounded-2xl
           opacity-0
           group-hover:opacity-100
-          transition-all duration-700 ease-in-out
-          overflow-hidden
+          transition-all duration-700 ease-out
           z-0
         "
       >
@@ -37,12 +36,12 @@ export const HoverImage = ({
       </div>
 
       {/* MAIN IMAGE */}
-      <div className="relative z-10 rounded-2xl overflow-hidden shadow-large">
+      <div className="relative z-10 overflow-hidden rounded-2xl shadow-large">
         <img
           src={src}
           alt={alt}
           className={cn(
-            "w-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105",
+            "w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105",
             heightClass
           )}
         />
