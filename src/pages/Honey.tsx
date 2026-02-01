@@ -12,8 +12,8 @@ import multifloraHoneyImg from "@/assets/honey-multiflora.jpg";
 const Honey = () => {
   return (
     <Layout headerTheme="honey">
-      {/* HERO */}
-      <section className="py-24 bg-honey-muted transition-colors duration-500">
+      {/* ================= HERO ================= */}
+      <section className="py-24 bg-honey-muted">
         <div className="container mx-auto px-4 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -24,7 +24,7 @@ const Honey = () => {
               <div className="rounded-2xl overflow-hidden shadow-large">
                 <img
                   src={heroHoneyImg}
-                  alt="Indonesian Forest Honey"
+                  alt="Premium Indonesian Forest Honey"
                   className="w-full h-96 object-cover"
                 />
               </div>
@@ -44,8 +44,8 @@ const Honey = () => {
                 Premium Indonesian Forest Honey
               </h1>
               <p className="text-muted-foreground mb-6">
-                Raw, unheated, and export-ready honey harvested from wild forest beehives in
-                Indonesia’s tropical rainforests.
+                Raw, unheated, and export-ready honey harvested from wild forest
+                beehives in Indonesia’s tropical rainforests.
               </p>
 
               <div className="flex flex-wrap gap-3 mb-6">
@@ -70,7 +70,7 @@ const Honey = () => {
         </div>
       </section>
 
-      {/* ORIGIN & PROCESS */}
+      {/* ================= ORIGIN & PROCESS ================= */}
       <section className="py-20">
         <div className="container mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
@@ -78,8 +78,8 @@ const Honey = () => {
               Wild Forest Origin, Natural Purity
             </h2>
             <p className="text-muted-foreground mb-6">
-              Harvested from wild forest beehives, not farmed or industrial apiaries,
-              preserving natural purity and unique botanical character.
+              Harvested from wild forest beehives, not farmed or industrial
+              apiaries, preserving natural purity and unique botanical character.
             </p>
             <ul className="space-y-2 text-muted-foreground list-disc list-inside">
               <li>Wild forest beehives</li>
@@ -101,7 +101,7 @@ const Honey = () => {
         </div>
       </section>
 
-      {/* CAPACITY & EXPORT */}
+      {/* ================= CAPACITY & EXPORT ================= */}
       <section className="py-20 bg-honey-muted">
         <div className="container mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
@@ -128,7 +128,7 @@ const Honey = () => {
               ].map((item) => (
                 <div
                   key={item}
-                  className="bg-white border border-honey/20 rounded-xl p-4 shadow-soft"
+                  className="bg-white border border-honey/20 rounded-xl p-4 shadow-soft text-sm"
                 >
                   {item}
                 </div>
@@ -138,7 +138,7 @@ const Honey = () => {
         </div>
       </section>
 
-      {/* VARIETIES */}
+      {/* ================= VARIETIES ================= */}
       <section className="py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <h2 className="font-heading text-2xl md:text-3xl font-bold mb-10">
@@ -147,44 +147,68 @@ const Honey = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Premium Forest */}
-            <div className="border border-honey/20 rounded-2xl overflow-hidden shadow-soft">
-              <img src={forestHoneyImg} alt="Premium Forest Honey" className="h-56 w-full object-cover" />
+            <div className="border border-honey/20 rounded-2xl overflow-hidden shadow-soft bg-white">
+              <img
+                src={forestHoneyImg}
+                alt="Premium Forest Honey"
+                className="h-56 w-full object-cover"
+              />
               <div className="p-6">
                 <h3 className="font-heading font-bold text-xl mb-3">
                   Premium Forest Honey
                 </h3>
-                <ul className="text-muted-foreground list-disc list-inside space-y-1">
+                <p className="text-muted-foreground text-sm mb-4">
+                  Raw forest honey with smooth natural sweetness and mild floral
+                  aroma from diverse wild forest nectar sources.
+                </p>
+                <ul className="text-muted-foreground list-disc list-inside space-y-1 text-sm">
                   <li>Raw & unheated</li>
-                  <li>Mild floral aroma</li>
+                  <li>Naturally filtered</li>
                   <li>Daily consumption</li>
                 </ul>
               </div>
             </div>
 
             {/* Black Forest */}
-            <div className="border border-honey/20 rounded-2xl overflow-hidden shadow-soft">
-              <img src={blackHoneyImg} alt="Black Forest Honey" className="h-56 w-full object-cover" />
+            <div className="border border-honey/20 rounded-2xl overflow-hidden shadow-soft bg-white">
+              <img
+                src={blackHoneyImg}
+                alt="Black Forest Honey"
+                className="h-56 w-full object-cover"
+              />
               <div className="p-6">
                 <h3 className="font-heading font-bold text-xl mb-3">
                   Black Forest Honey
                 </h3>
-                <ul className="text-muted-foreground list-disc list-inside space-y-1">
-                  <li>High antioxidant</li>
-                  <li>Bold flavor</li>
+                <p className="text-muted-foreground text-sm mb-4">
+                  Naturally dark honey sourced from specific wild forest plants,
+                  known for bold flavor and higher antioxidant content.
+                </p>
+                <ul className="text-muted-foreground list-disc list-inside space-y-1 text-sm">
+                  <li>High antioxidant content</li>
+                  <li>Rich mineral profile</li>
                   <li>Functional health markets</li>
                 </ul>
               </div>
             </div>
 
             {/* Multiflora */}
-            <div className="border border-honey/20 rounded-2xl overflow-hidden shadow-soft">
-              <img src={multifloraHoneyImg} alt="Multiflora Forest Honey" className="h-56 w-full object-cover" />
+            <div className="border border-honey/20 rounded-2xl overflow-hidden shadow-soft bg-white">
+              <img
+                src={multifloraHoneyImg}
+                alt="Multiflora Forest Honey"
+                className="h-56 w-full object-cover"
+              />
               <div className="p-6">
                 <h3 className="font-heading font-bold text-xl mb-3">
                   Multiflora Forest Honey
                 </h3>
-                <ul className="text-muted-foreground list-disc list-inside space-y-1">
-                  <li>Balanced taste</li>
+                <p className="text-muted-foreground text-sm mb-4">
+                  Raw honey collected from a wide variety of wild forest flowers,
+                  offering balanced taste and comprehensive nutrition.
+                </p>
+                <ul className="text-muted-foreground list-disc list-inside space-y-1 text-sm">
+                  <li>Balanced flavor</li>
                   <li>Family consumption</li>
                   <li>Food applications</li>
                 </ul>
@@ -194,7 +218,7 @@ const Honey = () => {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* ================= CTA ================= */}
       <section className="py-20 bg-honey-muted">
         <div className="container mx-auto px-4 lg:px-8 text-center">
           <Button asChild variant="hero" size="lg">
